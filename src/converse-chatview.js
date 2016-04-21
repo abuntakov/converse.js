@@ -299,17 +299,53 @@
                         // are mentioned.
                         extra_classes += ' mentioned';
                     }
-                    return $(template({
+
+                    var avatar = '';
+
+                    if(attrs.sender == 'me') {
+                        avatar = '<img src="/css/images/manager.png">';
+                        extra_classes += ' manager-answer';
+                    } 
+
+                     if(attrs.sgType) {
+                        if(attrs.sgType === 'BOT_ANSWER') {
+                            avatar = '<img src="/css/images/bot.png">';
+                        }
+                        extra_classes += ' ' + attrs.sgType.toLowerCase().replace(/_/g, '-');
+                     } 
+
+                    var $msgBody = $(template({
                             msgid: attrs.msgid,
                             'sender': attrs.sender,
                             'time': msg_time.format('hh:mm'),
                             'isodate': msg_time.format(),
                             'username': username,
                             'message': '',
+                            'avatar': avatar,
                             'extra_classes': extra_classes
-                        })).children('.chat-msg-content').first().text(text)
-                            .addHyperlinks()
-                            .addEmoticons(converse.visible_toolbar_buttons.emoticons).parent();
+                        }));
+
+                    if(text === '#schedule') {
+                        $msgBody.find('.msg-body').html('<iframe src="/schedule.html"  id="' + attrs.msgid +'" onLoad="autoResize(\'' + attrs.msgid + '\');"></iframe>')
+                    } else {
+                        $msgBody.find('.msg-body').text(text);
+                    }
+
+                    $msgBody.find('.msg-profile-img').html(avatar);
+
+                    return $msgBody;
+
+                    // return $(template({
+                    //         msgid: attrs.msgid,
+                    //         'sender': attrs.sender,
+                    //         'time': msg_time.format('hh:mm'),
+                    //         'isodate': msg_time.format(),
+                    //         'username': username,
+                    //         'message': text,
+                    //         'extra_classes': extra_classes
+                    //    })).find('.chat-msg-content').first().text(text);
+                    //.addHyperlinks()
+                    //.addEmoticons(converse.visible_toolbar_buttons.emoticons).parent();
                 },
 
                 showHelpMessages: function (msgs, type, spinner) {

@@ -13,53 +13,35 @@
     <link type="text/css" rel="stylesheet" media="screen" href="components/fontawesome/css/font-awesome.min.css" />
     <link type="text/css" rel="stylesheet" media="screen" href="css/theme.css" />
     <link type="text/css" rel="stylesheet" media="screen" href="css/converse.css" />
+    <link type="text/css" rel="stylesheet" media="screen" href="css/spiritguide.css" />
+    
     <script src="components/requirejs/require.js"></script>
     <script src="converse.js"></script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <ul class="nav navbar-nav"><li> <a href="/docs/html/index.html">Documentation</a> </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <section class="intro">
-        <div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading"><i class="icon-conversejs"></i>Converse.js</h1>
-                        <p class="intro-text">Developer page.</p>
-                        <p class="intro-text">
-                            Converse.js will only work on this page if you have 
-                            <a href="https://conversejs.org/docs/html/development.html">set up the development environment</a>.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="sg-layout sg-layout-left"></div>
+    <div class="sg-layout sg-layout-right"></div>
+    <div class="sg-layout sg-layout-center-top"></div>
+    <div class="sg-layout sg-layout-center-bottom"><div id="conversejs"></div></div>
+
+    
+    
+
 </body>
 
 <script>
     require(['converse'], function (converse) {
         converse.initialize({
             auto_away: 300,
-            i18n: locales['af'],
-            auto_join_rooms: [
-                'discuss@conference.conversejs.org',
-            ],
+            jid: 'hotel_manager@127.0.0.1',
+            password: 'q1w2e3',
+            i18n: locales['en'],
+            auto_login: true,
+            auto_join_rooms: ['hotel@conference.127.0.0.1'],
             auto_reconnect: true,
-            bosh_service_url: 'https://conversejs.org/http-bind/', // Please use this connection manager only for testing purposes
+            bosh_service_url: 'http://127.0.0.1:7070/http-bind/', // Please use this connection manager only for testing purposes
             keepalive: true,
             message_carbons: true,
             play_sounds: true,
@@ -70,5 +52,21 @@
             debug: true
         });
     });
+</script>
+<script language="JavaScript">
+<!--
+function autoResize(id){
+    var newheight;
+    var newwidth;
+
+    if(document.getElementById){
+        newheight = document.getElementById(id).contentWindow.document .body.scrollHeight;
+        newwidth = document.getElementById(id).contentWindow.document .body.scrollWidth;
+    }
+
+    document.getElementById(id).height = (newheight) + "px";
+    document.getElementById(id).width = (newwidth) + "px";
+}
+//-->
 </script>
 </html>

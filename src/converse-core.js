@@ -1192,11 +1192,12 @@
                     message: body || undefined,
                     msgid: msgid,
                     sender: sender,
-                    time: time
+                    time: time,
+						  sgType: $message.attr('sgType')
                 });
             }
         });
-        
+
         this.ChatBoxes = Backbone.Collection.extend({
             model: converse.ChatBox,
             comparator: 'time_opened',
