@@ -325,8 +325,8 @@
                             'extra_classes': extra_classes
                         }));
 
-                    if(text === '#schedule') {
-                        $msgBody.find('.msg-body').html('<iframe src="/schedule.html"  id="' + attrs.msgid +'" onLoad="autoResize(\'' + attrs.msgid + '\');"></iframe>')
+                    if(text.startsWith('#')) {
+                        $msgBody.find('.msg-body').html('<iframe src="' + text.substring(1, text.length) + '"  id="' + attrs.msgid +'" onLoad="autoResize(\'' + attrs.msgid + '\');"></iframe>')
                     } else {
                         $msgBody.find('.msg-body').text(text);
                     }
