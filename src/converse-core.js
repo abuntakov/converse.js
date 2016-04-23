@@ -1155,6 +1155,7 @@
             createMessage: function ($message, $delay) {
                 $delay = $delay || $message.find('delay');
                 var body = $message.children('body').text(),
+						  locale = $message.children('locale').text(),
                     delayed = $delay.length > 0,
                     fullname = this.get('fullname'),
                     is_groupchat = $message.attr('type') === 'groupchat',
@@ -1185,6 +1186,12 @@
                 } else {
                     sender = 'them';
                 }
+
+
+					 if(_.isEmpty(locale)){
+						 locale = null;
+					 }
+
                 return this.messages.create({
                     chat_state: chat_state,
                     delayed: delayed,
@@ -1193,7 +1200,9 @@
                     msgid: msgid,
                     sender: sender,
                     time: time,
-						  sgType: $message.attr('sgType')
+						  sgType: $message.attr('sgType'),
+						  locale: locale,
+						  originLang: $message.attr('sgLang')
                 });
             }
         });

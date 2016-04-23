@@ -333,6 +333,10 @@
 
                     $msgBody.find('.msg-profile-img').html(avatar);
 
+						  if(attrs.locale) {
+							  $('<div>').addClass('msg-locale').text(">>> " + attrs.locale).appendTo($msgBody.find('.locale'));
+						  }
+
                     return $msgBody;
 
                     // return $(template({
