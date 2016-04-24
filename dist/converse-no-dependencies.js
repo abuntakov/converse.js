@@ -3673,8 +3673,8 @@ define("polyfill", function(){});
 
             createMessage: function ($message, $delay) {
                 $delay = $delay || $message.find('delay');
-                var body = $message.children('body').text(),
-						  locale = $message.children('locale').text(),
+                var body = $message.children('body').filter(function(){ return !$(this).attr('xml:lang');}).text(),
+						  locale = $message.children('body').filter(function(){ return $(this).attr('xml:lang');}).text(),
                     delayed = $delay.length > 0,
                     fullname = this.get('fullname'),
                     is_groupchat = $message.attr('type') === 'groupchat',
@@ -3721,7 +3721,7 @@ define("polyfill", function(){});
                     time: time,
 						  sgType: $message.attr('sgType'),
 						  locale: locale,
-						  originLang: $message.attr('sgLang')
+						  originLang: $message.children('body').filter(function(){ return $(this).attr('xml:lang');}).first().attr('xml:lang')
                 });
             }
         });
